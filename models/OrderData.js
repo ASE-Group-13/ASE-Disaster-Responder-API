@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const responseDataSchema = new mongoose.Schema({
-	resource: {
+const orderDataSchema = new mongoose.Schema({
+	location: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "LocationData",
 	},
@@ -9,18 +9,18 @@ const responseDataSchema = new mongoose.Schema({
 		type: String,
     required: true,
 	},
-  waypoints: {
-    type: JSON,
-    required: false,
-  },
-  quantity: {
-    type: String,
-    required: true,
-  },
-  instructions: {
-    type: String,
-    required: false,
-  },
+	waypoints: {
+		type: JSON,
+		required: false,
+	},
+	quantity: {
+		type: String,
+		required: true,
+	},
+	instructions: {
+		type: String,
+		required: false,
+	},
 	disaster: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "DisasterData",
@@ -32,4 +32,4 @@ const responseDataSchema = new mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model("ResponseData", responseDataSchema);
+module.exports = mongoose.model("OrderData", orderDataSchema);

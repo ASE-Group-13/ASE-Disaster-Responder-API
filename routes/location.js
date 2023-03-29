@@ -37,10 +37,10 @@ router.put('/update-location/:id', async (req, res) => {
   }
 });
 
-router.get("/get-location/:resource", async (req,res) => {
-  const resposne = req.params;
+router.get("/get-locations/:resource", async (req,res) => {
+  const response = req.params;
   try {
-    const units = await LocationData.find({resource: { $in: [resposne]}});
+    const units = await LocationData.find({resource: { $in: [response]}});
     return res.json(units);
   } catch (err) {
     res.json({ message: err });
