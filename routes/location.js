@@ -1,4 +1,5 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 require("dotenv").config();
 const mongoose = require("mongoose");
 const LocationData = require("../models/LocationData");
@@ -46,3 +47,21 @@ router.get("/get-locations/:resource", async (req,res) => {
     res.json({ message: err });
   }
 })
+
+router.post("/add-location", async (req, res) => {
+  const newData = new LocationData({
+    name: req.body.name,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+    resource: req.body.resource,
+    capacity: req.body.capacity
+  });
+  try {
+    const saveData = await newData.save();
+    res.status(200).json({ success: true, saveData });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err });
+  }
+});
+
+module.exports = router;
