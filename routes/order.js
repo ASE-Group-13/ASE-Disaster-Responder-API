@@ -7,15 +7,15 @@ const LocationData = require("../models/LocationData");
 router.post("/send-order", async (req, res) => {
   try{
     try{
+      console.log(req.body);
       const location = await LocationData.findOne({ _id: req.body.location });
       if (location.capacity < req.body.quantity) {
         const shortfall = req.body.quantity - location.capacity;
         console.log(`Insufficient capacity for ${req.body.resource}. Shortfall = ${shortfall}`);
-        return res.status(400).json({ success: false, message: `nsufficient capacity for ${req.body.resource}. Shortfall = ${shortfall}` });
+        return res.status(400).json({ success: false, message: `Insufficient capacity for ${req.body.resource}. Shortfall = ${shortfall}` });
       }
       location.capacity -= req.body.quantity; // subtract the units required from the available capacity
       await location.save();
-      console.log(req.body);
       return res.status(200).json({ success: true, message: "Responders notified" });
     } catch{
       console.log("location not found");
