@@ -50,6 +50,13 @@ updateRestCentreCapacities();
 app.use(cors());
 app.use(express.json());
 
+app.get(`${api}/hello`, (req, res) => {
+  console.log("hello");
+  res
+    .status(200)
+    .send({ message: "Hello User!\nWelcome to Responder API" });
+});
+
 app.use(`${api}`, locationRoute);
 app.use(`${api}`, orderRoute);
 
